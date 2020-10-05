@@ -1,7 +1,7 @@
 #pragma once //only once include
-#include <memory>
+#include "engine/common.hpp"
 
-namespace engine
+namespace engine::engine
 {
 	class EngineImpl;
 	class Engine
@@ -24,12 +24,4 @@ namespace engine
 		Engine();
 		std::unique_ptr<EngineImpl> m_impl;
 	};
-
-	Engine::Engine()
-	{
-	}
-
-	Engine::~Engine()
-	{
-	}
 }

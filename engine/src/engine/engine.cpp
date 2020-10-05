@@ -1,7 +1,8 @@
-#include "engine/engine.hpp"
+#include "engine/engine/engine.hpp"
 #include <atomic> //garanti des confilts sur W/R de var
+#include <chrono>
 
-namespace engine
+namespace engine::engine
 {
 	class EngineImpl
 	{
@@ -28,9 +29,17 @@ namespace engine
 				return;
 			}
 			this->m_stop = false;
+			std::chrono::milliseconds dt(0);
 			while (!m_stop)
 			{
-				
+				auto start = std::chrono::high_resolution_clock::now();
+				//Update 
+
+
+				//Calcul dt
+				auto end = std::chrono::high_resolution_clock::now();
+				dt = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+
 			}
 		}
 		void Stop()
