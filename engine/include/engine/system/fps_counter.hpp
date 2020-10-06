@@ -15,7 +15,7 @@ namespace engine::system
 		FPS_counter(FPS_counter&& other) = delete;
 
 		virtual void Update(std::chrono::milliseconds dt) override;
-
+		
 	private:
 		std::unique_ptr<FPS_counterImpl> m_impl;
 

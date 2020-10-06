@@ -1,6 +1,9 @@
 #include "engine/engine/engine.hpp"
 #include <atomic> //garanti des confilts sur W/R de var
 #include <chrono>
+#include <vector>
+#include "engine/system/system.hpp"
+#include "engine/system/fps_counter.hpp"
 
 namespace engine::engine
 {
@@ -22,6 +25,11 @@ namespace engine::engine
 
 		}
 
+		void StartUp()
+		{
+			this->m_systems.emplace_back(std::make_unique<system::FPS_counter>());
+		}
+
 		void Run()
 		{
 			if (!this->m_stop)
@@ -34,8 +42,11 @@ namespace engine::engine
 			{
 				auto start = std::chrono::high_resolution_clock::now();
 				//Update 
-
-
+				for (auto& system : m_systems)
+				{
+					system->Update(dt);
+				}
+			
 				//Calcul dt
 				auto end = std::chrono::high_resolution_clock::now();
 				dt = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
@@ -48,6 +59,7 @@ namespace engine::engine
 		}
 	private:
 		std::atomic_bool m_stop = true;
+		std::vector<std::unique_ptr<system::ISystem>> m_systems;// on utilise les pointeur car on doit avoir des pointeurs hors ISystem = classe abstraite
 	};
 
 	Engine::Engine()
@@ -72,5 +84,10 @@ namespace engine::engine
 	void Engine::Stop()
 	{
 		this->m_impl->Stop();
+	}
+
+	void Engine::StartUp()
+	{
+		this->m_impl->StartUp();
 	}
 }

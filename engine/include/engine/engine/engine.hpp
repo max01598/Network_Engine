@@ -19,6 +19,7 @@ namespace engine::engine
 		void ParseCommandeLine(int argc, char* argv[]);
 		void Run();
 		void Stop();
+		void StartUp();
 
 	private:
 		Engine();
