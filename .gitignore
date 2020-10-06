@@ -133,6 +133,8 @@ $RECYCLE.BIN/
 *.lnk
 
 /build
+.vs/
+out/
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,visualstudiocode,c,c++,cmake
 
